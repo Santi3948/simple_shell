@@ -1,6 +1,9 @@
 #include "main.h"
 int main(void)
 {
-	char *buff[1024];
+	char *a[1024];
 	
+	*a = NULL;
+	split(a);
+	return (0);
 }
