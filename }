@@ -1,0 +1,21 @@
+#include "main.h"
+int fork(char *argv[], int argc, char *envp[])
+{
+	int i;
+	pid_t MyPid;
+	char *argv[] = {"/bin/ls", "-l", "/tmp/", NULL};
+
+	for (i = 0, i < 5, i++)
+	{
+		MyPid = fork();
+		if (MyPid == -1)
+			perror("Error");
+		if (MyPid == 0)
+		{
+			execve("/bin/ls", argv, NULL);
+		} else
+		{
+			wait(&i);
+		}
+	}
+}
