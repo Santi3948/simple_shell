@@ -1,16 +1,15 @@
 #include "main.h"
 int main(void)
 {
-	char *a = NULL, **buffer = NULL;
+	char *a = NULL, **x;
 	size_t len = 0;
 	int i = 0;
 
-	buffer = malloc(1024);
 	printf("$ ");
 	getline(&a, &len, stdin);
 	a[strlen(a) - 1] = '\0';
-	split(a, &i, &buffer);
-	free(buffer);
+	x = split(a, &i);
 	free(a);
+	free(x);
 	return (0);
 }
