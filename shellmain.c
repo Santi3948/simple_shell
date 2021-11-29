@@ -1,16 +1,24 @@
 #include "main.h"
 int main(void)
 {
-	char *a = NULL;
-        size_t len = 0;
+	char *a;
+        size_t len = 1024;
+	ssize_t chars;
 	
 	while (1)
 	{
         	printf("$ ");
-		getline(&a, &len, stdin);
+		a = malloc(len);
+		if (!a)
+			break;
+		chars = getline(&a, &len, stdin);
+		if (chars == -1)
+			break;
 		a[strlen(a) - 1] = '\0';
 		sshell(a);
 	        free(a);
 	}
+	if (a)
+		free(a);
 	return (0);	
 }

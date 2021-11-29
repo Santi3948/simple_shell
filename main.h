@@ -8,8 +8,9 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-char **split(char *a, int *i);
+char **split(char *a, int *i, char ***buffer);
 void _which(char *argv[], int argc);
 int _fork(int argc, char *envp[]);
 int sshell(char *av);
+char *_getenv(const char *name);
 #endif
