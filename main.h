@@ -11,4 +11,5 @@
 char **split(char *a, int *i);
 void _which(char *argv[], int argc);
 int _fork(int argc, char *envp[]);
+int sshell(char *av);
 #endif

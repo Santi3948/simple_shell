@@ -17,6 +17,6 @@ char **split(char *a, int *i)
 		printf("%s\n", buffer[(*i)]);
 		(*i)++;
 	}
-
+	free(buffer);
 	return (buffer);
 }
