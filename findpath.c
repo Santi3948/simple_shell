@@ -1,16 +1,16 @@
 #include "main.h"
-void wich(char *argv[], int argc)
+void _which(char *argv[], int argc)
 {
 	char cwd[1024];
 	struct stat st;
 	int i = 1;
  
+	getcwd(cwd, sizeof(cwd));
 	if (argc < 2)
     	{
-        	printf("Usage: %s filename ...\n", argv[0]);
-        	return (1);
+        	printf("Usage: %s filename ...\n", cwd);
+        	exit(-1);
     	}
-	getcwd(cwd, sizeof(cwd));
 	while (argv[i])
     	{
         	printf("%s:", argv[i]);
