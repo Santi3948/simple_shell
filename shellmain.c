@@ -1,5 +1,5 @@
 #include "main.h"
-int main(void)
+int main(int ac, char **av, char **env)
 {
 	char *a;
         size_t len = 1024;

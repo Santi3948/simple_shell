@@ -1,7 +1,6 @@
 #include "main.h"
 int main(void)
 {
-	extern char **environ;
 	int i = 0;
 
 	while (environ[i])

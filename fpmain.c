@@ -9,7 +9,7 @@ int main(void)
         printf("$ ");
         getline(&a, &len, stdin);
         a[strlen(a) - 1] = '\0';
-        c = split(a, &i);
+        c = split(a, &i, " ");
 	_which(c, (i + 1));
 	free(a);
         return (0);	
