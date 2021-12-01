@@ -19,6 +19,7 @@ typedef struct lol
 	struct lol *next;
 } lol;
 char *_strstr(char *haystack, const char *needle);
+char *str_concat(const char *s1, const char *s2);
 char **split(char *a, int *i, char *del);
 void _which(char *argv[], int argc);
 int _fork(int argc, char *envp[]);
