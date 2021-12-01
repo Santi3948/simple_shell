@@ -1,4 +1,9 @@
 #include "main.h"
+/**
+ * printpath - function that prints the path
+ * @path: environ variable path
+ * Return: value of path
+ */
 char **printpath(char *path)
 {
 	int i = 0, x = 0;

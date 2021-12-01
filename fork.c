@@ -1,4 +1,10 @@
 #include "main.h"
+/**
+ * main - main
+ * @argc: number of arguments
+ * @envp: pointer to env
+ * Return: 0
+ */
 int main(int argc, char *envp[])
 {
 	int i, a;
@@ -7,7 +13,7 @@ int main(int argc, char *envp[])
 	(void)argc;
 	(void)envp;
 
-	for(i = 0; i < 5; i++)
+	for (i = 0; i < 5; i++)
 	{
 		MyPid = fork();
 		if (MyPid == -1)

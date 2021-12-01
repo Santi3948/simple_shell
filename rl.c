@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+/**
+ * main - main
+ * Return: 0
+ */
 int main(void)
 {
 	char *buffer;
@@ -10,7 +14,7 @@ int main(void)
 		return (-1);
 
 	printf("$ ");
-	getline(&buffer , &len, stdin);
+	getline(&buffer, &len, stdin);
 	printf("%s", buffer);
 	free(buffer);
 	return (0);

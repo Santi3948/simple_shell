@@ -1,10 +1,15 @@
 #include "main.h"
+/**
+ * sshell - super simple shell
+ * @av: pointer to string of arguments
+ * Return: 0
+ */
 int sshell(char *av)
 {
 	pid_t mypid;
 	int p;
-	char *arr[2]; 
-	
+	char *arr[2];
+
 	arr[0] = av;
 	arr[1] = NULL;
 

@@ -1,4 +1,9 @@
 #include "main.h"
+/**
+ * _getenv - get the environ value
+ * @name: name of the environ
+ * Return: value of the environ
+ */
 char *_getenv(const char *name)
 {
 	int i = 0, x = 0;
