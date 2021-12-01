@@ -26,6 +26,7 @@ struct lol *linkedpath(char **b);
 lol *add_node_end(lol **head, const char *str);
 void print_list(const lol *h);
 int sshell(char *av);
+int delete_nodeint_at_index(lol **head, unsigned int index);
 char *_getenv(const char *name);
 char **printpath(char *path);
 extern char **environ;

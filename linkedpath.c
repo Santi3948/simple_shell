@@ -6,14 +6,18 @@
  */
 lol *linkedpath(char **b)
 {
-	lol *linked = malloc(sizeof(lol));
+	lol *linked;
 	int i = 0;
 
+	linked = NULL;
+	linked = malloc(sizeof(lol));
+	
 	while (b[i] && linked)
 	{
 		add_node_end(&linked, b[i]);
 		i++;
 	}
+	delete_nodeint_at_index(&linked, 0);
 	return (linked);
 }
 /**
@@ -49,6 +53,42 @@ lol *add_node_end(lol **head, const char *a)
 	aux->next = new;
 	}
 	return (*head);
+}
+int delete_nodeint_at_index(lol **head, unsigned int index)
+{
+	unsigned int count = 0;
+	lol *tmp, *sig;
+
+	if (head && *head)
+	{
+		tmp = *head;
+		if (index > 0)
+		{
+			if (tmp->next == NULL)
+				return (-1);
+			while (tmp)
+			{
+				if (index - 1 == count)
+				{
+					sig = tmp->next->next;
+					free(tmp->next);
+					tmp->next = sig;
+					return (1);
+				}
+				count++;
+				tmp = tmp->next;
+			}
+		}
+		else
+		{
+			*head = tmp->next;
+			free(tmp);
+			return (1);
+		}
+		return (1);
+	}
+		return (-1);
+	return (-1);
 }
 /**
  * print_list - print the linked list
