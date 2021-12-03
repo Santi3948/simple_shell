@@ -8,24 +8,27 @@
  */
 int main(int ac, char **av, char **env)
 {
-	char *a;
-	size_t len = 1024;
+	char *a = NULL;
 	ssize_t chars;
+	size_t len = 0;
+	(void)ac;
+	(void)av;
+	(void)env;
 
 	while (1)
 	{
-		printf("$ ");
-		a = malloc(len);
-		if (!a)
-			break;
+		write(STDOUT_FILENO,"$ ", 2);
 		chars = getline(&a, &len, stdin);
 		if (chars == -1)
+		{
+			free(a);
+			a = NULL;
 			break;
-		a[strlen(a) - 1] = '\0';
-		sshell(a);
+		}
+		a[_strlen(a) - 1] = '\0';
 		free(a);
+		a = NULL;
 	}
-	if (a)
-		free(a);
+	free(a);
 	return (0);
 }
