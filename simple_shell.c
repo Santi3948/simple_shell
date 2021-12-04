@@ -12,6 +12,10 @@
  */
 int main(int ac, char **av, char **env)
 {
+	char *PATH = _getenv("PATH");
+	int x = 0;
+	char **TOK_PATH = split(PATH, &x, ":");
+	struct stat buf;
 	char *a = NULL;
 	char **tokenized;
 	ssize_t chars;
@@ -39,21 +43,36 @@ int main(int ac, char **av, char **env)
                         	a = NULL;
                         	break;
                 }
-		tokenized = split(a, &i, " ");
 		a[_strlen(a) - 1] = '\0';
+		tokenized = split(a, &i, " ");
 		if (tokenized[0] && _strcmp(tokenized[0], "exit"))
 		{
 			free(a);
 			a = NULL;
 			free(tokenized);
 			_exit_();
-			break;
+		}
+		if (tokenized[0][0] == '/')
+		{
+			if (stat(tokenized[0], &buf) == 0)
+			{
+				execve_fork(tokenized[0], tokenized, NULL);
+			}
+		}
+		else
+		{
+			if(buscopath(TOK_PATH, tokenized[0]) != 0)
+			{
+				b = buscopath(TOK_PATH, tokenized[0]);
+				tokenized[0] = b;
+				execve_fork(tokenized[0], tokenized, NULL);
+			}
 		}
 		i = 0;
 		free(a);
 		a = NULL;
 		free(tokenized);
-		if(mode = NON_INTERACTIVE_MODE)
+		if(mode == NON_INTERACTIVE_MODE)
 			break;
 	}
 	return (0);
