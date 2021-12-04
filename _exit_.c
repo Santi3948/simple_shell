@@ -1,5 +1,5 @@
 #include "main.h"
-int exit(void)
+int _exit_(void)
 {
 	return(1);
 }

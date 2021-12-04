@@ -22,5 +22,7 @@ extern char**environ;
 int _strlen(char *s);
 char *_getenv(const char *name);
 char **split(char *a, int *i, char *del);
+int _strcmp(char *s1, char *s2);
 char *_strstr(char *haystack, const char *needle);
+int _exit_(void);
 #endif
