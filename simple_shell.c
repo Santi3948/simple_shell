@@ -13,10 +13,10 @@
 int main(int ac, char **av, char **env)
 {
 	char *PATH = _getenv("PATH");
-	int x = 0;
+	int x = 0, j = 0;
 	char **TOK_PATH = split(PATH, &x, ":");
 	struct stat buf;
-	char *a = NULL;
+	char *a = NULL, *b;
 	char **tokenized;
 	ssize_t chars;
 	size_t len = 0;
@@ -61,17 +61,22 @@ int main(int ac, char **av, char **env)
 		}
 		else
 		{
-			if(buscopath(TOK_PATH, tokenized[0]) != 0)
-			{
-				b = buscopath(TOK_PATH, tokenized[0]);
-				tokenized[0] = b;
-				execve_fork(tokenized[0], tokenized, NULL);
-			}
+			b = buscopath(TOK_PATH[j], tokenized[0]);
+			j++;
+			while (stat(b, &buf) == -1 && TOK_PATH[j])
+                        {
+				b = buscopath(TOK_PATH[j], tokenized[0]);
+				j++;
+                        }
+			tokenized[0] = b;
+			execve_fork(tokenized[0], tokenized, NULL);
 		}
+		j = 0;
 		i = 0;
 		free(a);
 		a = NULL;
 		free(tokenized);
+		free(b);
 		if(mode == NON_INTERACTIVE_MODE)
 			break;
 	}
