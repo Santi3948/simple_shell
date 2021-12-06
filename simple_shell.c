@@ -27,21 +27,10 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
  	
-	printf("%s\n", PATH_);
 	PATH_TOK = split(PATH_, &x, "=");
-	while(PATH_TOK[j])
-	{
-		printf("%s\n", PATH_TOK[j]);
-		j++;
-	}
 	x = 0;
 	TOK_PATH = split(PATH_TOK[1], &x, ":");
 	j = 0;	
-	while(TOK_PATH[j])
-	{
-		printf("%s\n", TOK_PATH[j]);
-		j++;
-	}	
 
 	while(1)
 	{
@@ -85,16 +74,10 @@ int main(int ac, char **av, char **env)
 			free(PATH_TOK);
 			_exit_();
 		}
-		printf("macaco\n");
-		if (tokenized[0])
-		printf("%s\n", tokenized[0]);
-		printf("mae mia\n");
 		if (tokenized[0] && _strcmp(tokenized[0], "env"))
 			env_(env);
-		printf("ananana\n");
 		if (tokenized[0][0] && tokenized[0][0] == '/')
 		{
-			printf("doooooou\n");
 			if (stat(tokenized[0], &buf) == 0)
 			{
 				execve_fork(tokenized[0], tokenized, NULL);
@@ -102,14 +85,6 @@ int main(int ac, char **av, char **env)
 		}
 		else
 		{
-			printf("tukson\n");
-			j = 0;
-			while(TOK_PATH[j])
-			{
-				printf("%s\n", TOK_PATH[j]);
-				j++;
-			}
-			printf("hola\n");
 			j = 0;
 			b = buscopath(TOK_PATH[j], tokenized[0]);
 			while (stat(b, &buf) == -1 && TOK_PATH[j + 1])
