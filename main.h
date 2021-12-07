@@ -23,11 +23,12 @@ int _strlen(char *s);
 char *_strdup(char *str);
 int execve_fork(const char *pathname, char *const argv[], char *const envp[]);
 char *_getenv(char *name, char **env);
-char **split(char *a, int *i, char *del);
+char **split(char *a, char *del);
 int _strcmp(char *s1, char *s2);
 char *_strstr(char *haystack, const char *needle);
 char *str_concat(char *s1, char *s2);
 int _exit_(void);
 char *buscopath(char *path, char *a);
 int env_(char **env);
+void _free_(char **, char *, char *, char *, char **, char **);
 #endif

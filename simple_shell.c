@@ -12,31 +12,21 @@
  */
 int main(int ac, char **av, char **env)
 {
-	int x = 0, j = 0;
-	struct stat buf;
-	char *b = NULL;
+	struct stat buf, buf2;
 	ssize_t chars;
 	size_t len = 1024;
-	char *a = malloc(len);
-	char **tokenized = malloc(1024 * sizeof(char *));
-	int i = 0;
-	int mode = INTERACTIVE_MODE;
-	char *PATH_ = _getenv("PATH", env);
-	char **PATH_TOK = malloc(1024 * sizeof(char *));
-	char **TOK_PATH;
+	int mode = INTERACTIVE_MODE, j = 0;
+	char *PATH_, **PATH_TOK, **TOK_PATH, *a, **tokenized, *b = NULL;
 	(void)ac;
 	(void)av;
- 	
-	PATH_TOK = split(PATH_, &x, "=");
-	x = 0;
-	TOK_PATH = split(PATH_TOK[1], &x, ":");
-	j = 0;	
-
+ 
 	while(1)
 	{
+		j = 0;
 		a = malloc(len);
-		tokenized = malloc(1024);
-		b = malloc(1024);
+		PATH_ = _getenv("PATH", env);
+		PATH_TOK = split(PATH_, "=");
+		TOK_PATH = split(PATH_TOK[1], ":");
 		if(!isatty(STDIN_FILENO))
 		{
 			mode = NON_INTERACTIVE_MODE;
@@ -49,29 +39,18 @@ int main(int ac, char **av, char **env)
 		if (chars == 1)
 			continue;
 		if (chars == -1)
-                {
-                        	free(a);
-                        	a = NULL;
                         	break;
-                }
 		a[_strlen(a) - 1] = '\0';
-		i = 0;
-		tokenized = split(a, &i, " ");
-
-
+		tokenized = split(a, " ");
 		if (tokenized[0] && _strcmp(tokenized[0], "exit"))
 		{
-			free(tokenized);
+			_free_(tokenized, a, b, PATH_, TOK_PATH, PATH_TOK);
 			tokenized = NULL;
-			free(a);
-			a = NULL;
-			free(b);
+                	a = NULL;
 			b = NULL;
-			free(PATH_);
-			PATH_ = NULL;
-			free(TOK_PATH);
-			TOK_PATH = NULL;
-			free(PATH_TOK);
+                	PATH_ = NULL;
+                	TOK_PATH = NULL;
+                	PATH_TOK = NULL;
 			_exit_();
 		}
 		if (tokenized[0] && _strcmp(tokenized[0], "env"))
@@ -85,32 +64,30 @@ int main(int ac, char **av, char **env)
 		}
 		else
 		{
-			j = 0;
 			b = buscopath(TOK_PATH[j], tokenized[0]);
-			while (stat(b, &buf) == -1 && TOK_PATH[j + 1])
+			while (stat(b, &buf2) == -1 && TOK_PATH[j + 1])
                         {
 				j++;
 				b = buscopath(TOK_PATH[j], tokenized[0]);
                         }
-			if (stat(b, &buf) == 0)
+			if (stat(b, &buf2) == 0)
 			{
 				tokenized[0] = b;
 				execve_fork(tokenized[0], tokenized, NULL);
 				continue;
 			}
 		}
-		j = 0;
-		i = 0;
-		free(a);
-		a = NULL;
-		free(tokenized);
-		tokenized = NULL;
-		free(b);
-		b = NULL;
 		if(mode == NON_INTERACTIVE_MODE)
-			break;
-		
+                        break;
+		_free_(tokenized, a, b, PATH_, TOK_PATH, PATH_TOK);
+		tokenized = NULL;
+		b = NULL;
+		a = NULL;
+		PATH_ = NULL;
+		TOK_PATH = NULL;
+		PATH_TOK = NULL;
 	}
+	_free_(tokenized, a, b, PATH_, TOK_PATH, PATH_TOK);
 	return (0);
 }
 #endif

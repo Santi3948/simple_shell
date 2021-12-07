@@ -8,9 +8,10 @@
  * @del: delimitador
  * Return: the split string
  */
-char **split(char *a, int *i, char *del)
+char **split(char *a, char *del)
 {
 	char *token, **buffer;
+	int i = 0;
 
 	buffer = malloc(1024);
 	token = strtok(a, del);
@@ -18,9 +19,9 @@ char **split(char *a, int *i, char *del)
 		exit(-1);
 	while (token)
 	{
-		buffer[(*i)] = token;
+		buffer[i] = token;
 		token = strtok(NULL, del);
-		(*i)++;
+		i++;
 	}
 	return (buffer);
 }
