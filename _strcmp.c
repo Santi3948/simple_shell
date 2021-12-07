@@ -1,21 +1,24 @@
 #include "main.h"
+#include "main.h"
+/**
+ * _strcmp - compares ASCII numeric value of two strings.
+ * @s1: first string
+ * @s2: second string
+ * Return: ASCII numeric difference between s1 and s2
+ */
 int _strcmp(char *s1, char *s2)
 {
-	int i = 0;
+	int pos, result;
 
-	if (!s1 && !s2)
-		return (1);
-	if (!s1 || !s2)
-		return (0);
-
-	while (s1[i] && s2[i])
+	for (pos = 0; s1[pos] != 0; pos++)
 	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
+		if (s1[pos] == s2[pos])
+			result = 0;
+		else
+		{
+			result = s1[pos] - s2[pos];
+			break;
+		}
 	}
-
-	if (!s1[i] && !s2[i])
-		return (1);
-	return (0);
+	return (result);
 }

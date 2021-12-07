@@ -17,24 +17,20 @@ int main(int ac, char **av, char **env)
 	size_t len = 1024;
 	int mode = INTERACTIVE_MODE, j = 0;
 	char *PATH_, **PATH_TOK, **TOK_PATH, *a, **tokenized, *b = NULL;
+	a = malloc(len);
 	(void)ac;
 	(void)av;
  
 	while(1)
 	{
 		j = 0;
-		a = malloc(len);
 		PATH_ = _getenv("PATH", env);
 		PATH_TOK = split(PATH_, "=");
 		TOK_PATH = split(PATH_TOK[1], ":");
 		if(!isatty(STDIN_FILENO))
-		{
 			mode = NON_INTERACTIVE_MODE;
-		}
 		if (mode == INTERACTIVE_MODE)
-		{
 			write(STDOUT_FILENO,"$ ", 2);
-		}
 		chars = getline(&a, &len, stdin);
 		if (chars == 1)
 			continue;
@@ -42,18 +38,23 @@ int main(int ac, char **av, char **env)
                         	break;
 		a[_strlen(a) - 1] = '\0';
 		tokenized = split(a, " ");
-		if (tokenized[0] && _strcmp(tokenized[0], "exit"))
+		if (tokenized[0] && !_strcmp(tokenized[0], "exit"))
 		{
-			_free_(tokenized, a, b, PATH_, TOK_PATH, PATH_TOK);
+			free(tokenized);
 			tokenized = NULL;
+			free(b);
+                	b = NULL;
+			free(a);
                 	a = NULL;
-			b = NULL;
+			free(PATH_);
                 	PATH_ = NULL;
+			free(TOK_PATH);
                 	TOK_PATH = NULL;
+			free(PATH_TOK);
                 	PATH_TOK = NULL;
 			_exit_();
 		}
-		if (tokenized[0] && _strcmp(tokenized[0], "env"))
+		if (tokenized[0] && !_strcmp(tokenized[0], "env"))
 			env_(env);
 		if (tokenized[0][0] && tokenized[0][0] == '/')
 		{
@@ -76,18 +77,23 @@ int main(int ac, char **av, char **env)
 				execve_fork(tokenized[0], tokenized, NULL);
 				continue;
 			}
+			perror(tokenized[0]);
 		}
+		free(tokenized);
+              	tokenized = NULL;
+             	free(b);
+            	b = NULL;
+           	free(a);
+            	a = NULL;
+            	free(PATH_);
+             	PATH_ = NULL;
+            	free(TOK_PATH);
+         	TOK_PATH = NULL;
+             	free(PATH_TOK);
+            	PATH_TOK = NULL;
 		if(mode == NON_INTERACTIVE_MODE)
-                        break;
-		_free_(tokenized, a, b, PATH_, TOK_PATH, PATH_TOK);
-		tokenized = NULL;
-		b = NULL;
-		a = NULL;
-		PATH_ = NULL;
-		TOK_PATH = NULL;
-		PATH_TOK = NULL;
+			break;
 	}
-	_free_(tokenized, a, b, PATH_, TOK_PATH, PATH_TOK);
 	return (0);
 }
 #endif
