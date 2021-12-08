@@ -8,7 +8,7 @@
 void exec(char **tokenized, char *b, char **TOK_PATH)
 {
 		int j = 0;
-		struct stat buf, buf2;
+		struct stat buf = {0}, buf2 = {0};
 
 		if (tokenized[0][0] && tokenized[0][0] == '/')
 		{
@@ -17,6 +17,7 @@ void exec(char **tokenized, char *b, char **TOK_PATH)
 		}
 		else
 		{
+			if (TOK_PATH[j] && tokenized[0])
 			b = buscopath(TOK_PATH[j], tokenized[0]);
 			for (j = 0; stat(b, &buf2) == -1 && TOK_PATH[j + 1]; j++)
 				b = buscopath(TOK_PATH[j], tokenized[0]);
@@ -28,4 +29,5 @@ void exec(char **tokenized, char *b, char **TOK_PATH)
 			}
 			perror(tokenized[0]);
 		}
+		free(b);
 }
