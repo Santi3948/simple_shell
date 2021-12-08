@@ -20,17 +20,17 @@ int main(int ac, char **av, char **env)
 	a = malloc(len);
 	(void)ac;
 	(void)av;
- 
-	while(1)
+
+	while (1)
 	{
 		j = 0;
 		PATH_ = _getenv("PATH", env);
 		PATH_TOK = split(PATH_, "=");
 		TOK_PATH = split(PATH_TOK[1], ":");
-		if(!isatty(STDIN_FILENO))
+		if (!isatty(STDIN_FILENO))
 			mode = NON_INTERACTIVE_MODE;
 		if (mode == INTERACTIVE_MODE)
-			write(STDOUT_FILENO,"$ ", 2);
+			write(STDOUT_FILENO, "$ ", 2);
 		chars = getline(&a, &len, stdin);
 		if (chars == 1)
 			continue;

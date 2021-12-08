@@ -2,6 +2,7 @@
 /**
  * _getenv - get the environ value
  * @name: name of the environ
+ * @env: environment variables
  * Return: value of the environ
  */
 char *_getenv(char *name, char **env)
