@@ -7,8 +7,6 @@
  */
 char *buscopath(char *path, char *a)
 {
-	char *x = malloc(1024 * sizeof(x));
-
-	x = str_concat(str_concat(path, "/"), a);
+	char *x = str_concat(str_concat(path, "/"), a);
 	return (x);
 }

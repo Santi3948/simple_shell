@@ -47,6 +47,7 @@ int main(int ac, char **av, char **env)
 			env_(env);
 		exec(tokenized, b, TOK_PATH, dup);
 		_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK);
+		free(dup);
 		tokenized = NULL;
 		b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL;
 		if (mode == NON_INTERACTIVE_MODE)
