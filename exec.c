@@ -1,4 +1,10 @@
 #include "main.h"
+/**
+ * exec - execute
+ * @tokenized: token
+ * @b: b
+ * @TOK_PATH: tok path
+ */
 void exec(char **tokenized, char *b, char **TOK_PATH)
 {
 		int j = 0;

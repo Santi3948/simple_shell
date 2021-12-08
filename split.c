@@ -4,7 +4,6 @@
 /**
  * split - function that split an argument
  * @a: string of argument
- * @i: int
  * @del: delimitador
  * Return: the split string
  */
