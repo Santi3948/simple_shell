@@ -43,7 +43,7 @@ int main(int ac, char **av, char **env)
 			b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL;
 			_exit_();
 		}
-		if (tokenized[0] && !_strcmp(tokenized[0], "env"))
+		if (tokenized[0] && !_strcmp(tokenized[0], "env") && !tokenized[1])
 			env_(env);
 		exec(tokenized, b, TOK_PATH, dup);
 		_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK);
