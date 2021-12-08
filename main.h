@@ -31,5 +31,5 @@ int _exit_(void);
 char *buscopath(char *path, char *a);
 int env_(char **env);
 void _free_(char **, char *, char *, char *, char **, char **);
-void _getnull_(char **a, char *b, char *c, char *d, char **e, char **f);
+void exec(char **, char *, char **);
 #endif
