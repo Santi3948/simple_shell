@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * last_character - return de lenght of a string including \0
+ * last_character - return de lenght of a string including null
  * @s: a string
  * Return: int
  */
@@ -9,7 +9,7 @@ int last_character(char *s)
 	int count = 0;
 	int i = 0;
 
-	while(s[i])
+	while (s[i])
 	{
 		count++;
 		i++;
@@ -19,8 +19,8 @@ int last_character(char *s)
 }
 /**
  * str_concat - check the code
- * @s1: s1
- * @s2: s2
+ * @dest: s1
+ * @src: s2
  * Return: pointer to d.
  */
 char *str_concat(char *dest, char *src)

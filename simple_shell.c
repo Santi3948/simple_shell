@@ -12,12 +12,10 @@
  */
 int main(int ac, char **av, char **env)
 {
-	ssize_t chars;
-	size_t len = 1024;
-	int mode = INTERACTIVE_MODE;
-	char *PATH_, **PATH_TOK, **TOK_PATH, *a, **tokenized, *b = NULL, *dup = NULL, *copy = NULL;
+	ssize_t chars, size_t len = 1024, int mode = INTERACTIVE_MODE;
+	char *PATH_, **PATH_TOK, **TOK_PATH, *a = calloc(len, sizeof(char));
+	char **tokenized, *b = NULL, *dup = NULL, *copy = NULL;
 
-	a = calloc(len, sizeof(char));
 	(void)ac;
 	(void)av;
 	while (1)
@@ -33,29 +31,23 @@ int main(int ac, char **av, char **env)
 			continue;
 		if (chars == -1)
 			break;
-		a[_strlen(a) - 1] = '\0';
-		a = realloc(a, 1 + strlen(a) * sizeof(char));
+		a[_strlen(a) - 1] = '\0', a = realloc(a, 1 + strlen(a) * sizeof(char));
 		tokenized = split(a, " ");
 		if (tokenized[0] && !_strcmp(tokenized[0], "exit"))
 		{
-			if(tokenized[1])
+			if (tokenized[1])
 				copy = tokenized[1];
-			_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK);
-			free(dup);
+			_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK), free(dup);
 			b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL, tokenized = NULL;
 			if (copy)
-			{
 				_exit_(atoi(copy));
-			}
 			_exit_(0);
 		}
 		if (tokenized[0] && !_strcmp(tokenized[0], "env") && !tokenized[1])
 			env_(env);
 		exec(tokenized, b, TOK_PATH, dup);
-		_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK);
-		free(dup);
-		tokenized = NULL;
-		b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL;
+		_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK), free(dup);
+		tokenized = NULL, b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL;
 		if (mode == NON_INTERACTIVE_MODE)
 			break;
 	}

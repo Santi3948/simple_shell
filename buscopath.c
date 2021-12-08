@@ -8,8 +8,8 @@
 char *buscopath(char *path, char *a)
 {
 	char *aux = calloc(1024, sizeof(char));
-	
-	if(path && a)
+
+	if (path && a)
 	{
 	str_concat(aux, path);
 	str_concat(aux, "/");
