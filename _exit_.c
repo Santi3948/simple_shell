@@ -5,6 +5,6 @@
  */
 int _exit_(void)
 {
-	exit(1);
+	exit();
 	return (0);
 }
