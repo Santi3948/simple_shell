@@ -40,18 +40,12 @@ int main(int ac, char **av, char **env)
 		tokenized = split(a, " ");
 		if (tokenized[0] && !_strcmp(tokenized[0], "exit"))
 		{
-			free(tokenized);
+			_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK);
 			tokenized = NULL;
-			free(b);
-                	b = NULL;
-			free(a);
-                	a = NULL;
-			free(PATH_);
-                	PATH_ = NULL;
-			free(TOK_PATH);
-                	TOK_PATH = NULL;
-			free(PATH_TOK);
-                	PATH_TOK = NULL;
+			b = NULL;
+			a = NULL;
+			TOK_PATH = NULL;
+			PATH_TOK = NULL;
 			_exit_();
 		}
 		if (tokenized[0] && !_strcmp(tokenized[0], "env"))
@@ -79,18 +73,12 @@ int main(int ac, char **av, char **env)
 			}
 			perror(tokenized[0]);
 		}
-		free(tokenized);
-              	tokenized = NULL;
-             	free(b);
-            	b = NULL;
-           	free(a);
-            	a = NULL;
-            	free(PATH_);
-             	PATH_ = NULL;
-            	free(TOK_PATH);
-         	TOK_PATH = NULL;
-             	free(PATH_TOK);
-            	PATH_TOK = NULL;
+		_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK);
+		tokenized = NULL;
+		b = NULL;
+		a = NULL;
+		TOK_PATH = NULL;
+		PATH_TOK = NULL;
 		if(mode == NON_INTERACTIVE_MODE)
 			break;
 	}
