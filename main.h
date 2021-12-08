@@ -26,7 +26,7 @@ char **split(char *a, char *del);
 int _strcmp(char *s1, char *s2);
 char *_strstr(char *haystack, const char *needle);
 char *str_concat(char *s1, char *s2);
-int _exit_(int a);
+int _exit_(char *a);
 char *buscopath(char *path, char *a);
 int env_(char **env);
 void _free_(char **, char *, char *, char *, char **, char **);

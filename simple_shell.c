@@ -10,17 +10,15 @@
  * @env: environ variables
  * Return: 0
  */
-int main(int ac, char **av, char **env)
+int main(int ac __attribute__((unused)), char **av, char **env)
 {
 	ssize_t chars;
 	size_t len = 1024;
-	int mode = INTERACTIVE_MODE, j = 0;
-	char *PATH_ = NULL, **PATH_TOK = NULL, **TOK_PATH = NULL;
+	int mode = INTERACTIVE_MODE;
+	char *PATH_ = NULL, **PATH_TOK = NULL, **TOK_PATH = NULL, *a;
 	char **tokenized, *b = NULL, *dup = NULL, *copy = NULL;
 
-	*a = calloc(len, sizeof(char));
-	(void)ac;
-	(void)av;
+	(void)av, a = calloc(len, sizeof(char));
 	while (1)
 	{
 		PATH_ = _getenv("PATH=", env), PATH_TOK = split(PATH_, "=");
@@ -42,9 +40,7 @@ int main(int ac, char **av, char **env)
 				copy = tokenized[1];
 			_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK), free(dup);
 			b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL, tokenized = NULL;
-			if (copy)
-				_exit_(atoi(copy));
-			_exit_(0);
+			_exit_(copy);
 		}
 		if (tokenized[0] && !_strcmp(tokenized[0], "env") && !tokenized[1])
 			env_(env);

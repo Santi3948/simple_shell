@@ -4,8 +4,10 @@
  * @a: int
  * Return: 0
  */
-int _exit_(int a)
+int _exit_(char *a)
 {
-	exit(a);
+	if (a)
+		exit(atoi(a));
+	exit(0);
 	return (0);
 }
