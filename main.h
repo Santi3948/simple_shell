@@ -32,4 +32,5 @@ int env_(char **env);
 void _free_(char **, char *, char *, char *, char **, char **);
 void exec(char **, char *, char **, char *);
 int last_character(char *s);
+int _strncmp(char *s1, char *s2, size_t i);
 #endif

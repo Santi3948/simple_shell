@@ -10,7 +10,7 @@ char *_getenv(char *name, char **env)
 	int i = 0;
 	char *dup;
 
-	while (env[i] && _strstr(env[i], name) == 0)
+	while (env[i] && _strncmp(name, env[i], 5))
 	{
 		i++;
 	}

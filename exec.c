@@ -10,7 +10,10 @@ void exec(char **tokenized, char *b, char **TOK_PATH, char *dup)
 {
 		int j = 0;
 		struct stat buf = {0}, buf2 = {0};
-
+		
+		for(j = 0; TOK_PATH[j]; j++)
+		printf("%s\n", TOK_PATH[j]);
+		j = 0;
 		b = NULL;
 		if (tokenized[0][0] && tokenized[0][0] == '/')
 		{

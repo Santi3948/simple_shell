@@ -12,15 +12,17 @@
  */
 int main(int ac, char **av, char **env)
 {
-	ssize_t chars, size_t len = 1024, int mode = INTERACTIVE_MODE;
-	char *PATH_, **PATH_TOK, **TOK_PATH, *a = calloc(len, sizeof(char));
+	ssize_t chars;
+	size_t len = 1024;
+	int mode = INTERACTIVE_MODE, j = 0;
+	char *PATH_ = NULL, **PATH_TOK = NULL, **TOK_PATH = NULL, *a = calloc(len, sizeof(char));
 	char **tokenized, *b = NULL, *dup = NULL, *copy = NULL;
 
 	(void)ac;
 	(void)av;
 	while (1)
 	{
-		PATH_ = _getenv("PATH", env), PATH_TOK = split(PATH_, "=");
+		PATH_ = _getenv("PATH=", env), PATH_TOK = split(PATH_, "=");
 		TOK_PATH = split(PATH_TOK[1], ":");
 		if (!isatty(STDIN_FILENO))
 			mode = NON_INTERACTIVE_MODE;
@@ -45,6 +47,11 @@ int main(int ac, char **av, char **env)
 		}
 		if (tokenized[0] && !_strcmp(tokenized[0], "env") && !tokenized[1])
 			env_(env);
+		printf("%s\n", PATH_);
+		for(j = 0; PATH_TOK[j]; j++)
+		printf("%s\n", PATH_TOK[j]);
+		for(j = 0; TOK_PATH[j]; j++)
+		printf("%s\n", TOK_PATH[j]);
 		exec(tokenized, b, TOK_PATH, dup);
 		_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK), free(dup);
 		tokenized = NULL, b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL;
