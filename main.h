@@ -18,7 +18,6 @@ typedef struct lol
 	char *a;
 	struct lol *next;
 } lol;
-extern char**environ;
 int _strlen(char *s);
 char *_strdup(char *str);
 int execve_fork(const char *pathname, char *const argv[], char *const envp[]);
