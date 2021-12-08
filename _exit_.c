@@ -3,8 +3,8 @@
  * _exit_ - exit the function
  * Return: 0
  */
-int _exit_(void)
+int _exit_(int a)
 {
-	exit();
+	exit(a);
 	return (0);
 }

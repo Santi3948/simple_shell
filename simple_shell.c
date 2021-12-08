@@ -34,14 +34,18 @@ int main(int ac, char **av, char **env)
 		if (chars == -1)
 			break;
 		a[_strlen(a) - 1] = '\0';
+		tokenized = NULL;
 		tokenized = split(a, " ");
 		if (tokenized[0] && !_strcmp(tokenized[0], "exit"))
 		{
 			_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK);
 			free(dup);
-			tokenized = NULL;
 			b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL;
-			_exit_();
+			if (tokenized[1])
+			{
+				_exit_(atoi(tokenized[1]));
+			}
+			_exit_(0);
 		}
 		if (tokenized[0] && !_strcmp(tokenized[0], "env") && !tokenized[1])
 			env_(env);
