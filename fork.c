@@ -25,5 +25,5 @@ int execve_fork(const char *pathname, char *const argv[], char *const envp[])
 	}
 	else
 		wait(&a);
-	return(0);
+	return (0);
 }
