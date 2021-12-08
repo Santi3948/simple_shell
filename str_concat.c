@@ -1,36 +1,38 @@
 #include "main.h"
 /**
+ * last_character - return de lenght of a string including \0
+ * @s: a string
+ * Return: int
+ */
+int last_character(char *s)
+{
+	int count = 0;
+	int i;
+
+	for (i = 0; s[i] != 0; i++)
+	{
+		count++;
+	}
+
+	return (count);
+}
+/**
  * str_concat - check the code
  * @s1: s1
  * @s2: s2
  * Return: pointer to d.
  */
-char *str_concat(char *s1, char *s2)
+char *str_concat(char *dest, char *src)
 {
-	int i, j, n = 0, h = 0, g;
-	char *d;
+	int paste = last_character(dest);
+	int copy = 0;
 
-	if (s1 == NULL && s2 == NULL)
+	for (copy = 0; src[copy] != '\0'; copy++)
 	{
-	d = malloc(0);
-	return (d);
+		dest[paste] = src[copy];
+		paste++;
 	}
-	if (s1 == NULL)
-	s1 = "";
-	if (s2 == NULL)
-	s2 = "";
-	for (i = 0; s1[i]; i++)
-	n = n + 1;
-	for (j = 0; s2[j]; j++)
-	h = h + 1;
-	d = malloc(sizeof(char) * (n + h) + 1);
-	if (d == NULL)
-	{
-		return (NULL);
-	}
-	for (g = 0; g <= n - 1 ; g++)
-	d[g] = s1[g];
-	for (g = n; g <= n + h - 1; g++)
-	d[g] = s2[g - n];
-	return (d);
+	dest[paste] = '\0';
+
+	return (dest);
 }

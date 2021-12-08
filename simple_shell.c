@@ -15,7 +15,7 @@ int main(int ac, char **av, char **env)
 	ssize_t chars;
 	size_t len = 1024;
 	int mode = INTERACTIVE_MODE;
-	char *PATH_, **PATH_TOK, **TOK_PATH, *a, **tokenized, *b = NULL;
+	char *PATH_, **PATH_TOK, **TOK_PATH, *a, **tokenized, *b = NULL, *dup = NULL;
 
 	a = malloc(len);
 	(void)ac;
@@ -38,13 +38,14 @@ int main(int ac, char **av, char **env)
 		if (tokenized[0] && !_strcmp(tokenized[0], "exit"))
 		{
 			_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK);
+			free(dup);
 			tokenized = NULL;
 			b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL;
 			_exit_();
 		}
 		if (tokenized[0] && !_strcmp(tokenized[0], "env"))
 			env_(env);
-		exec(tokenized, b, TOK_PATH);
+		exec(tokenized, b, TOK_PATH, dup);
 		_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK);
 		tokenized = NULL;
 		b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL;
