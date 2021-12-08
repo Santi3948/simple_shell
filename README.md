@@ -19,14 +19,7 @@ directory) tells you where you are sitting in the directory. The
 command `ls` will list the files in the current directory.
 
 When you start up a terminal on most systems, you will start in a special
-directory called the *home* directory. If you're using the managed desktop,
-you'll initially find yourself in a Desktop directory, so change to your home:
-
-    cd
-
-Every user has their own home
-directory where they have full access to create and delete files and
-directories. You can also find out your user
+directory called the *home* directory. You can find out your user
 name by entering the command `whoami`.
 
 You can always get back to your home directory by typing `cd` (return).
