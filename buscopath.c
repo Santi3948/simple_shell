@@ -15,8 +15,5 @@ char *buscopath(char *path, char *a)
 	str_concat(aux, "/");
 	str_concat(aux, a);
 	}
-	printf("%s\n", path);
-	printf("%s\n", a);
-	printf("%s\n", aux);
 	return (aux);
 }
