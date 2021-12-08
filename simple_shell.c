@@ -31,16 +31,17 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 		if (chars == 1)
 			continue;
 		if (chars == -1)
+		{
+			_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK), free(dup);
 			break;
+		}
 		a[_strlen(a) - 1] = '\0', a = realloc(a, 1 + strlen(a) * sizeof(char));
 		tokenized = split(a, " ");
 		if (tokenized[0] && !_strcmp(tokenized[0], "exit"))
 		{
 			if (tokenized[1])
 				copy = tokenized[1];
-			_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK), free(dup);
-			b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL, tokenized = NULL;
-			_exit_(copy);
+			_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK), free(dup), _exit_(copy);
 		}
 		if (tokenized[0] && !_strcmp(tokenized[0], "env") && !tokenized[1])
 			env_(env);
