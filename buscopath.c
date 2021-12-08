@@ -9,6 +9,7 @@ char *buscopath(char *path, char *a)
 {
 	char *s = NULL;
 	char *x = NULL;
+
 	s = str_concat(path, "/");
 	x = str_concat(s, a);
 
