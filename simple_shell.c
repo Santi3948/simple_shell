@@ -15,9 +15,9 @@ int main(int ac, char **av, char **env)
 	ssize_t chars;
 	size_t len = 1024;
 	int mode = INTERACTIVE_MODE;
-	char *PATH_, **PATH_TOK, **TOK_PATH, *a, **tokenized, *b = NULL, *dup = NULL;
+	char *PATH_, **PATH_TOK, **TOK_PATH, *a, **tokenized, *b = NULL, *dup = NULL, *copy = NULL;
 
-	a = malloc(len);
+	a = calloc(len, sizeof(char));
 	(void)ac;
 	(void)av;
 	while (1)
@@ -34,16 +34,18 @@ int main(int ac, char **av, char **env)
 		if (chars == -1)
 			break;
 		a[_strlen(a) - 1] = '\0';
-		tokenized = NULL;
+		a = realloc(a, 1 + strlen(a) * sizeof(char));
 		tokenized = split(a, " ");
 		if (tokenized[0] && !_strcmp(tokenized[0], "exit"))
 		{
+			if(tokenized[1])
+				copy = tokenized[1];
 			_free_(tokenized, b, PATH_, a, TOK_PATH, PATH_TOK);
 			free(dup);
-			b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL;
-			if (tokenized[1])
+			b = NULL, a = NULL, TOK_PATH = NULL, PATH_TOK = NULL, tokenized = NULL;
+			if (copy)
 			{
-				_exit_(atoi(tokenized[1]));
+				_exit_(atoi(copy));
 			}
 			_exit_(0);
 		}

@@ -7,6 +7,14 @@
  */
 char *buscopath(char *path, char *a)
 {
-	char *x = str_concat(str_concat(path, "/"), a);
-	return (x);
+	char *aux = calloc(1024, sizeof(char));
+	
+	if(path && a)
+	{
+	str_concat(aux, path);
+	str_concat(aux, "/");
+	str_concat(aux, a);
+	}
+	printf("%s\n", aux);
+	return (aux);
 }

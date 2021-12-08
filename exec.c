@@ -17,12 +17,10 @@ void exec(char **tokenized, char *b, char **TOK_PATH, char *dup)
 				execve_fork(tokenized[0], tokenized, NULL);
 		}
 		else
-		{
-			if (TOK_PATH[j] && tokenized[0])
+		{	if (TOK_PATH[j] && tokenized[0])
 			{
 			dup = _strdup(TOK_PATH[j]);
 			b = buscopath(dup, tokenized[0]);
-			}
 			while(stat(b, &buf2) == -1 && TOK_PATH[j + 1])
 			{
 				j++;
@@ -36,9 +34,12 @@ void exec(char **tokenized, char *b, char **TOK_PATH, char *dup)
 				tokenized[0] = b;
 				execve_fork(tokenized[0], tokenized, NULL);
 				free(dup);
+				free(b);
 				return;
+			}
 			}
 			perror(tokenized[0]);
 		}
+		free(b);
 		free(dup);
 }

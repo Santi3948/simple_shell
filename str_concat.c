@@ -7,11 +7,12 @@
 int last_character(char *s)
 {
 	int count = 0;
-	int i;
+	int i = 0;
 
-	for (i = 0; s[i] != 0; i++)
+	while(s[i])
 	{
 		count++;
+		i++;
 	}
 
 	return (count);
@@ -32,7 +33,7 @@ char *str_concat(char *dest, char *src)
 		dest[paste] = src[copy];
 		paste++;
 	}
-	dest[paste] = '\0';
+	dest[paste] = 0;
 
 	return (dest);
 }

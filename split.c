@@ -12,7 +12,7 @@ char **split(char *a, char *del)
 	char *token, **buffer;
 	int i = 0;
 
-	buffer = malloc(1024);
+	buffer = calloc(1024, sizeof(char));
 	token = strtok(a, del);
 	if (!buffer)
 		exit(-1);
