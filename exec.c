@@ -12,7 +12,7 @@ void exec(char **tokenized, char *b, char **TOK_PATH, char *dup)
 		struct stat buf = {0}, buf2 = {0};
 
 		j = 0, b = NULL;
-		if (tokenized[0][0] && tokenized[0][0] == '/')
+		if (tokenized[0] && _strstr(tokenized[0], "/"))
 		{
 			if (stat(tokenized[0], &buf) == 0)
 				execve_fork(tokenized[0], tokenized, NULL);
